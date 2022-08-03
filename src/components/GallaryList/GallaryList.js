@@ -10,6 +10,10 @@ const GallaryList = () => {
 
   let iiif_url = useRef('')
 
+  const dummy = () => {
+    setCurrentPage(1)
+  }
+
   useEffect(() => {
     const url = `https://api.artic.edu/api/v1/artworks?page=${currentPage}&fields=id,title,image_id,artist_title&limit=40`
     fetchArtWorks(url)
