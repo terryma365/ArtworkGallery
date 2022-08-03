@@ -5,8 +5,8 @@ import ArtWorkThumbnail from "../ArtWorkThumbnail/ArtWorkThumbnail";
 const GallaryList = () => {
 
   const [artWorks, setArtWorks] = useState([])
-  const [currentPage, setCurrentPage] = useState(1)
-  // const [iiif_url, setIiif_url] = useState('')
+  const [currentPage, setCurrentPage] = useState(3)
+
   let iiif_url = useRef('')
 
   useEffect(() => {
@@ -33,7 +33,7 @@ const GallaryList = () => {
     <>
       {
         artWorks.map(artwork => (
-          <ArtWorkThumbnail key={artwork.id} artwork={artwork} iiif_url={iiif_url.current}/>
+          <ArtWorkThumbnail key={artwork.id} artwork={artwork} iiif_url={iiif_url.current} />
         ))
       }
     </>
