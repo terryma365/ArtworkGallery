@@ -1,6 +1,22 @@
 import React from "react";
 import { useEffect, useState } from "react";
 import ArtWorkThumbnail from "../ArtWorkThumbnail/ArtWorkThumbnail";
+import FilterButton from "../FilterButton/FilterButton";
+
+import './GallaryList.css'
+
+const categories = [
+  {
+    name: 'cityscapes',
+    type: 'subject_ids',
+    id: 'TM-8762'
+  },
+  {
+    name: 'Impressionism',
+    type: 'style_ids',
+    id: 'TM-7543'
+  }
+]
 
 const GallaryList = () => {
 
@@ -8,15 +24,19 @@ const GallaryList = () => {
   const [imgBaseUrl, setImgBaseUrl] = useState('')
   // const [currentPage, setCurrentPage] = useState(1)
   let currentPage = 1
+  const url_suffix = 'fields=id,title,image_id,artist_title,subject_ids&limit=40'
   const [query, setQuery] = useState('')
+  const [currentCategories, setCurrentCategories] = useState(categories)
 
   useEffect(() => {
-    const url = `https://api.artic.edu/api/v1/artworks?page=${currentPage}&fields=id,title,image_id,artist_title&limit=40`
+    const url = `https://api.artic.edu/api/v1/artworks?page=${currentPage}&${url_suffix}`
     fetchArtWorks(url)
 
   }, [currentPage])
 
   const fetchArtWorks = (url) => {
+    console.log("url", url)
+
     fetch(url)
       .then(respsonse => respsonse.json())
       .then(
@@ -30,7 +50,7 @@ const GallaryList = () => {
   }
 
   const onSearchClick = () => {
-    const url = `https://api.artic.edu/api/v1/artworks/search?q=${query}&fields=id,title,image_id,artist_title`
+    const url = `https://api.artic.edu/api/v1/artworks/search?q=${query}&${url_suffix}`
     fetchArtWorks(url)
   }
 
@@ -47,19 +67,41 @@ const GallaryList = () => {
     }
   }
 
-  return (
+  const onFilterButtonClick = (categoryId) => {
+    if (currentCategories.length === 1) {
+      setCurrentCategories(categories)
+      onSearchClick()
+      return
+    }
 
+    let filteredCategory = categories.find(category => category.id === categoryId)
+    setCurrentCategories([filteredCategory])
+
+    const url = `https://api.artic.edu/api/v1/artworks/search?q=${query}&${url_suffix}&query[term][${filteredCategory.type}]=${filteredCategory.id}`
+    fetchArtWorks(url)
+  }
+
+  return (
     <>
       <div>
-        <input onChange={onQueryChange} onKeyDown={onKeyDown} value={query}></input>
+        <input onChange={onQueryChange} onKeyDown={onKeyDown} value={query} className="searchBar" placeholder="Search by keyword, artist, or reference"></input>
         <button onClick={onSearchClick}>Search</button>
       </div>
+      <div className="category-container">
+        {
+          currentCategories.map(category => (
+            <FilterButton key={category.id} category={category} setCurrentCategories={(id) => onFilterButtonClick(id)} />
+          ))
+        }
+      </div>
 
-      {
-        artWorks.map(artwork => (
-          <ArtWorkThumbnail key={artwork.id} artwork={artwork} imgBaseUrl={imgBaseUrl} />
-        ))
-      }
+      <div className="container">
+        {
+          artWorks.map(artwork => (
+            <ArtWorkThumbnail key={artwork.id} artwork={artwork} imgBaseUrl={imgBaseUrl} className="item" />
+          ))
+        }
+      </div>
     </>
   )
 }
