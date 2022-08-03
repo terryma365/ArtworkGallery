@@ -8,11 +8,9 @@ const GallaryList = () => {
   const [currentPage, setCurrentPage] = useState(1)
   const [query, setQuery] = useState('')
 
-  let iiif_url = useRef('')
+  setCurrentPage(1)
 
-  const dummy = () => {
-    setCurrentPage(1)
-  }
+  let iiif_url = useRef('')
 
   useEffect(() => {
     const url = `https://api.artic.edu/api/v1/artworks?page=${currentPage}&fields=id,title,image_id,artist_title&limit=40`
@@ -48,6 +46,7 @@ const GallaryList = () => {
   }
 
   return (
+
     <>
       <div>
         <input onChange={onQueryChange}></input>
