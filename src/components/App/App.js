@@ -9,7 +9,7 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path='/' element={<GallaryList />}></Route>
-          <Route path='/artwork/:artWorkId' element={<ArtWorkDetails />}></Route>
+          <Route path='/artwork/:artWorkId' element={<ArtWorkDetails />} />
         </Routes>
       </BrowserRouter>
     </>

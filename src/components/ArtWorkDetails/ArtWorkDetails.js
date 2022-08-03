@@ -1,6 +1,6 @@
 import React from "react";
 import { useState, useEffect, useRef } from "react";
-import {useParams} from "react-router-dom"
+import { useParams } from "react-router-dom"
 
 
 const ArtWorkDetails = () => {
@@ -21,23 +21,21 @@ const ArtWorkDetails = () => {
 
           iiif_url.current = jsonData.config.iiif_url
           setArtWork(jsonData.data)
+
+          document.title = jsonData.data.title
         }
       )
 
-    // return () => {
-    //   second
-    // }
   }, [artWorkId])
 
 
   return (
     <>
-    <img src={`${iiif_url.current}/${artWork.image_id}/full/843,/0/default.jpg`} style={{ height: 843 + 'px' }} alt={artWork.title}></img>
-    <h1>{artWork.title}</h1>
-    <h2>{artWork.artist_title}</h2>
-    {/* <p>{artWork.dimensions}</p> */}
-    <p>{artWork.artist_display}</p>
-    <p>{artWork.classification_titles ? (artWork.classification_titles.length > 0 ? artWork.classification_titles.join(', '): '') : ''}</p>
+      <img src={`${iiif_url.current}/${artWork.image_id}/full/843,/0/default.jpg`} style={{ height: 843 + 'px' }} alt={artWork.title}></img>
+      <h1>{artWork.title}</h1>
+      <h2>{artWork.artist_title}</h2>
+      <p>{artWork.artist_display}</p>
+      <p>{artWork.classification_titles ? (artWork.classification_titles.length > 0 ? artWork.classification_titles.join(', ') : '') : ''}</p>
     </>
   )
 }
