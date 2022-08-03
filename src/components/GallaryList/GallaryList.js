@@ -5,10 +5,9 @@ import ArtWorkThumbnail from "../ArtWorkThumbnail/ArtWorkThumbnail";
 const GallaryList = () => {
 
   const [artWorks, setArtWorks] = useState([])
-  const [currentPage, setCurrentPage] = useState(1)
+  // const [currentPage, setCurrentPage] = useState(1)
+  let currentPage = 1
   const [query, setQuery] = useState('')
-
-  setCurrentPage(1)
 
   let iiif_url = useRef('')
 
