@@ -75,14 +75,24 @@ const GallaryList = () => {
   const url_suffix = 'fields=id,title,image_id,artist_title,subject_ids&limit=40'
   const [query, setQuery] = useState('')
   const [currentCategories, setCurrentCategories] = useState(categories)
+  const [inputValue, setInputValue] = useState('')
 
   useEffect(() => {
-    const url = `https://api.artic.edu/api/v1/artworks/search?q=${query}&${url_suffix}&page=${currentPage}`
-    fetchArtWorks(url)
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [currentPage])
+    let url = `https://api.artic.edu/api/v1/artworks/search?q=${query}&${url_suffix}&page=${currentPage}`
 
-  const fetchArtWorks = (url, mergeData=true) => {
+    let mergeData = currentPage !== 1
+
+    if (currentCategories.length === 1) {
+      let filteredCategory = currentCategories[0]
+      url = `https://api.artic.edu/api/v1/artworks/search?q=${query}&${url_suffix}&query[term][${filteredCategory.type}]=${filteredCategory.id}&page=${currentPage}`
+
+    }
+
+    fetchArtWorks(url, mergeData)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [currentPage,currentCategories, query])
+
+  const fetchArtWorks = (url, mergeData = true) => {
     console.log("url", url)
 
     fetch(url)
@@ -115,13 +125,12 @@ const GallaryList = () => {
   }
 
   const onSearchClick = () => {
-    const url = `https://api.artic.edu/api/v1/artworks/search?q=${query}&${url_suffix}`
+    setQuery(inputValue)
     setCurrentPage(1)
-    fetchArtWorks(url, false)
   }
 
-  const onQueryChange = (e) => {
-    setQuery(e.target.value)
+  const onInputValueChange = (e) => {
+    setInputValue(e.target.value)
   }
 
   const onKeyDown = (e) => {
@@ -142,9 +151,7 @@ const GallaryList = () => {
 
     let filteredCategory = categories.find(category => category.id === categoryId)
     setCurrentCategories([filteredCategory])
-
-    const url = `https://api.artic.edu/api/v1/artworks/search?q=${query}&${url_suffix}&query[term][${filteredCategory.type}]=${filteredCategory.id}`
-    fetchArtWorks(url, false)
+    setCurrentPage(1)
   }
 
   const fetchData = () => {
@@ -155,7 +162,7 @@ const GallaryList = () => {
   return (
     <>
       <div className="searchBar">
-        <input onChange={onQueryChange} onKeyDown={onKeyDown} value={query} className="searchInput" placeholder="Search by keyword, artist, or reference"></input>
+        <input onChange={onInputValueChange} onKeyDown={onKeyDown} value={inputValue} className="searchInput" placeholder="Search by keyword, artist, or reference"></input>
         <button onClick={onSearchClick} className="searchIcon">
           <FontAwesomeIcon icon={faSearch} />
         </button>
