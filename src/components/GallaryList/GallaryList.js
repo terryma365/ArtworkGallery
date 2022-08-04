@@ -72,13 +72,12 @@ const GallaryList = () => {
   const [artWorks, setArtWorks] = useState([])
   const [imgBaseUrl, setImgBaseUrl] = useState('')
   const [currentPage, setCurrentPage] = useState(1)
-  // let currentPage = 1
   const url_suffix = 'fields=id,title,image_id,artist_title,subject_ids&limit=40'
   const [query, setQuery] = useState('')
   const [currentCategories, setCurrentCategories] = useState(categories)
 
   useEffect(() => {
-    const url = `https://api.artic.edu/api/v1/artworks?${url_suffix}&page=${currentPage}`
+    const url = `https://api.artic.edu/api/v1/artworks/search?q=${query}&${url_suffix}&page=${currentPage}`
     fetchArtWorks(url)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentPage])
@@ -117,6 +116,7 @@ const GallaryList = () => {
 
   const onSearchClick = () => {
     const url = `https://api.artic.edu/api/v1/artworks/search?q=${query}&${url_suffix}`
+    setCurrentPage(1)
     fetchArtWorks(url, false)
   }
 
