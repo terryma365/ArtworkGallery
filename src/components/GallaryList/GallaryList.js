@@ -2,6 +2,7 @@ import React from "react";
 import { useEffect, useState } from "react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSearch } from '@fortawesome/free-solid-svg-icons'
+import InfiniteScroll from 'react-infinite-scroll-component';
 
 
 import ArtWorkThumbnail from "../ArtWorkThumbnail/ArtWorkThumbnail";
@@ -70,14 +71,14 @@ const GallaryList = () => {
 
   const [artWorks, setArtWorks] = useState([])
   const [imgBaseUrl, setImgBaseUrl] = useState('')
-  // const [currentPage, setCurrentPage] = useState(1)
-  let currentPage = 1
+  const [currentPage, setCurrentPage] = useState(1)
+  // let currentPage = 1
   const url_suffix = 'fields=id,title,image_id,artist_title,subject_ids&limit=40'
   const [query, setQuery] = useState('')
   const [currentCategories, setCurrentCategories] = useState(categories)
 
   useEffect(() => {
-    const url = `https://api.artic.edu/api/v1/artworks?page=${currentPage}&${url_suffix}`
+    const url = `https://api.artic.edu/api/v1/artworks?${url_suffix}&page=${currentPage}`
     fetchArtWorks(url)
 
   }, [currentPage])
@@ -92,7 +93,20 @@ const GallaryList = () => {
           console.log(jsonData)
 
           setImgBaseUrl(jsonData.config.iiif_url)
-          setArtWorks(jsonData.data)
+
+          let currentSet = new Set(artWorks.map(el => el.id))
+          console.log(currentSet)
+
+          let set = jsonData.data.filter(el => {
+            const isDuplicate = currentSet.has(el.id)
+            currentSet.add(el.id)
+
+            return !isDuplicate
+          })
+
+          let newArtWorks = [...artWorks, ...set]
+          console.log(newArtWorks)
+          setArtWorks(newArtWorks)
         }
       )
   }
@@ -129,12 +143,17 @@ const GallaryList = () => {
     fetchArtWorks(url)
   }
 
+  const fetchData = () => {
+    let newCurrentPage = currentPage + 1
+    setCurrentPage(newCurrentPage)
+  }
+
   return (
     <>
       <div className="searchBar">
         <input onChange={onQueryChange} onKeyDown={onKeyDown} value={query} className="searchInput" placeholder="Search by keyword, artist, or reference"></input>
         <button onClick={onSearchClick} className="searchIcon">
-        <FontAwesomeIcon icon={faSearch} />
+          <FontAwesomeIcon icon={faSearch} />
         </button>
       </div>
       <div className="category-container">
@@ -144,14 +163,18 @@ const GallaryList = () => {
           ))
         }
       </div>
-
-      <div className="list-container">
+      <InfiniteScroll className="list-container"
+        dataLength={artWorks.length}
+        next={fetchData}
+        hasMore={true}
+        loader={<h4>Loading...</h4>}>
         {
           artWorks.map(artwork => (
             <ArtWorkThumbnail key={artwork.id} artwork={artwork} imgBaseUrl={imgBaseUrl} className="item" />
           ))
         }
-      </div>
+      </InfiniteScroll>
+
     </>
   )
 }
