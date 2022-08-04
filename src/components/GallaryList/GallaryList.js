@@ -76,6 +76,7 @@ const GallaryList = () => {
   const [query, setQuery] = useState('')
   const [currentCategories, setCurrentCategories] = useState(categories)
   const [inputValue, setInputValue] = useState('')
+  const [hasMore, setHasMore] = useState(true)
 
   useEffect(() => {
     let url = `https://api.artic.edu/api/v1/artworks/search?q=${query}&${url_suffix}&page=${currentPage}`
@@ -102,6 +103,7 @@ const GallaryList = () => {
           // console.log(jsonData)
 
           setImgBaseUrl(jsonData.config.iiif_url)
+          setHasMore(jsonData.data.length === 0)
 
           let newArtWorks = [...jsonData.data]
 
@@ -167,6 +169,7 @@ const GallaryList = () => {
           <FontAwesomeIcon icon={faSearch} />
         </button>
       </div>
+
       <div className="category-container">
         {
           currentCategories.map(category => (
@@ -174,10 +177,11 @@ const GallaryList = () => {
           ))
         }
       </div>
+
       <InfiniteScroll className="list-container"
         dataLength={artWorks.length}
         next={fetchData}
-        hasMore={true}
+        hasMore={hasMore}
         loader={<h4>Loading...</h4>}>
         {
           artWorks.map(artwork => (
