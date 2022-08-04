@@ -83,29 +83,33 @@ const GallaryList = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentPage])
 
-  const fetchArtWorks = (url) => {
+  const fetchArtWorks = (url, mergeData=true) => {
     console.log("url", url)
 
     fetch(url)
       .then(respsonse => respsonse.json())
       .then(
         jsonData => {
-          console.log(jsonData)
+          // console.log(jsonData)
 
           setImgBaseUrl(jsonData.config.iiif_url)
 
-          let currentSet = new Set(artWorks.map(el => el.id))
-          console.log(currentSet)
+          let newArtWorks = [...jsonData.data]
 
-          let newData = jsonData.data.filter(el => {
-            const isDuplicate = currentSet.has(el.id)
-            currentSet.add(el.id)
+          if (mergeData) {
+            let currentSet = new Set(artWorks.map(el => el.id))
 
-            return !isDuplicate
-          })
+            let newData = jsonData.data.filter(el => {
+              const isDuplicate = currentSet.has(el.id)
+              currentSet.add(el.id)
 
-          let newArtWorks = [...artWorks, ...newData]
-          console.log(newArtWorks)
+              return !isDuplicate
+            })
+
+            newArtWorks = [...artWorks, ...newData]
+          }
+
+          console.log(newArtWorks.length)
           setArtWorks(newArtWorks)
         }
       )
@@ -113,7 +117,7 @@ const GallaryList = () => {
 
   const onSearchClick = () => {
     const url = `https://api.artic.edu/api/v1/artworks/search?q=${query}&${url_suffix}`
-    fetchArtWorks(url)
+    fetchArtWorks(url, false)
   }
 
   const onQueryChange = (e) => {
@@ -140,7 +144,7 @@ const GallaryList = () => {
     setCurrentCategories([filteredCategory])
 
     const url = `https://api.artic.edu/api/v1/artworks/search?q=${query}&${url_suffix}&query[term][${filteredCategory.type}]=${filteredCategory.id}`
-    fetchArtWorks(url)
+    fetchArtWorks(url, false)
   }
 
   const fetchData = () => {
