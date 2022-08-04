@@ -80,7 +80,7 @@ const GallaryList = () => {
   useEffect(() => {
     const url = `https://api.artic.edu/api/v1/artworks?${url_suffix}&page=${currentPage}`
     fetchArtWorks(url)
-
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentPage])
 
   const fetchArtWorks = (url) => {
@@ -97,14 +97,14 @@ const GallaryList = () => {
           let currentSet = new Set(artWorks.map(el => el.id))
           console.log(currentSet)
 
-          let set = jsonData.data.filter(el => {
+          let newData = jsonData.data.filter(el => {
             const isDuplicate = currentSet.has(el.id)
             currentSet.add(el.id)
 
             return !isDuplicate
           })
 
-          let newArtWorks = [...artWorks, ...set]
+          let newArtWorks = [...artWorks, ...newData]
           console.log(newArtWorks)
           setArtWorks(newArtWorks)
         }
