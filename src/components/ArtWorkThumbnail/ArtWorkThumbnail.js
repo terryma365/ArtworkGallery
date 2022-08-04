@@ -8,10 +8,10 @@ const ArtWorkThumbnail = (props) => {
   const { imgBaseUrl } = props
 
   return (
-    <div>
+    <div className="item" >
       {/* TODO: when image_id is null */}
       <Link to={`/artwork/${id}`} >
-        <img src={`${imgBaseUrl}/${image_id}/full/843,/0/default.jpg`} style={{ height: 282 + 'px' }} alt={title}></img>
+        <img src={`${imgBaseUrl}/${image_id}/full/843,/0/default.jpg`} style={{ width: 336 + 'px' }} alt={title}></img>
       </Link>
       <h4>{title}</h4>
       <h5 className="grey">{artist_title}</h5>

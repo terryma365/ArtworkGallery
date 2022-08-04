@@ -5,11 +5,10 @@
   height: 400px;
   justify-content: space-around;
   align-items: flex-start;
+  padding-left: 50px;
+  padding-right: 50px;
 }
 
-.item {
-  width: 25%;
-}
 
 /* .item img {
   width: 100%;

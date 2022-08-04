@@ -103,7 +103,7 @@ const GallaryList = () => {
           // console.log(jsonData)
 
           setImgBaseUrl(jsonData.config.iiif_url)
-          setHasMore(jsonData.data.length === 0)
+          setHasMore(jsonData.data.length !== 0)
 
           let newArtWorks = [...jsonData.data]
 
@@ -185,7 +185,7 @@ const GallaryList = () => {
         loader={<h4>Loading...</h4>}>
         {
           artWorks.map(artwork => (
-            <ArtWorkThumbnail key={artwork.id} artwork={artwork} imgBaseUrl={imgBaseUrl} className="item" />
+            <ArtWorkThumbnail key={artwork.id} artwork={artwork} imgBaseUrl={imgBaseUrl} />
           ))
         }
       </InfiniteScroll>
