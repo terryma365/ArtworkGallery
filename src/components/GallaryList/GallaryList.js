@@ -15,6 +15,51 @@ const categories = [
     name: 'Impressionism',
     type: 'style_ids',
     id: 'TM-7543'
+  },
+  {
+    name: 'animal',
+    type: 'subject_ids',
+    id: 'TM-12218'
+  },
+  {
+    name: 'fashion',
+    type: 'subject_ids',
+    id: 'TM-8663'
+  },
+  {
+    name: 'pop art',
+    type: 'style_ids',
+    id: 'TM-7221'
+  },
+  {
+    name: 'mythology',
+    type: 'subject_ids',
+    id: 'TM-8766'
+  },
+  {
+    name: 'portraits',
+    type: 'subject_ids',
+    id: 'TM-8658'
+  },
+  {
+    name: 'furniture',
+    type: 'subject_ids',
+    id: 'TM-9132'
+  },
+  {
+    name: 'landscapes',
+    type: 'subject_ids',
+    id: 'TM-8657'
+  },
+  {
+    name: 'ancient',
+    type: 'style_ids',
+    id: 'TM-8542'
+  },
+  {
+    name: 'woodblock print',
+    type: 'classification_ids',
+    id: 'TM-402'
   }
 ]
 
