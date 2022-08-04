@@ -1,8 +1,11 @@
 import React from "react";
 import { useEffect, useState } from "react";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faSearch } from '@fortawesome/free-solid-svg-icons'
+
+
 import ArtWorkThumbnail from "../ArtWorkThumbnail/ArtWorkThumbnail";
 import FilterButton from "../FilterButton/FilterButton";
-
 import './GallaryList.css'
 
 const categories = [
@@ -128,9 +131,11 @@ const GallaryList = () => {
 
   return (
     <>
-      <div>
-        <input onChange={onQueryChange} onKeyDown={onKeyDown} value={query} className="searchBar" placeholder="Search by keyword, artist, or reference"></input>
-        <button onClick={onSearchClick}>Search</button>
+      <div className="searchBar">
+        <input onChange={onQueryChange} onKeyDown={onKeyDown} value={query} className="searchInput" placeholder="Search by keyword, artist, or reference"></input>
+        <button onClick={onSearchClick} className="searchIcon">
+        <FontAwesomeIcon icon={faSearch} />
+        </button>
       </div>
       <div className="category-container">
         {
@@ -140,7 +145,7 @@ const GallaryList = () => {
         }
       </div>
 
-      <div className="container">
+      <div className="list-container">
         {
           artWorks.map(artwork => (
             <ArtWorkThumbnail key={artwork.id} artwork={artwork} imgBaseUrl={imgBaseUrl} className="item" />

@@ -1,4 +1,4 @@
-.container {
+.list-container {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -16,11 +16,16 @@
 } */
 
 .searchBar {
+  display: flex;
+  flex-direction: row;
+  height: 56px;
+  margin: 20px 50px 10px 50px;
+}
+
+.searchInput {
   -webkit-box-flex: 1;
   -ms-flex: 1;
   flex: 1;
-  height: 56px;
-  margin: 20px;
   border: 1px solid transparent;
   border-radius: 0;
   border-top-left-radius: 2px;
@@ -31,8 +36,15 @@
   width: 50%;
 }
 
+.searchIcon {
+  width: 56px;
+  color: #767676;
+}
+
 .category-container {
   display: flex;
   flex-direction: row;
   align-items: flex-start;
+  justify-content: space-between;
+  margin: 0px 40px 10px 40px;
 }
