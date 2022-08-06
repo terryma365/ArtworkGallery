@@ -30,9 +30,8 @@
 .manifestTable {
     display: table;
     margin: 0 auto;
-
-    /* border: 1px solid lightslategray */
-}
+    width: 37%;
+ }
 
 td {
     padding-left: 30px;

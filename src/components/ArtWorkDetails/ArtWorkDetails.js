@@ -8,6 +8,8 @@ const ArtWorkDetails = () => {
   const [artWork, setArtWork] = useState({})
   const [imageURL, setimageURL] = useState('')
   const [descriptions, setDescriptions] = useState([])
+  const [tableDetails, setTableDetails] = useState([])
+
   let params = useParams()
   let artWorkId = params.artWorkId
 
@@ -20,11 +22,52 @@ const ArtWorkDetails = () => {
       .then(
         jsonData => {
           // console.log(jsonData)
+          let artWork = jsonData.data
 
           setimageURL(jsonData.config.iiif_url)
-          setArtWork(jsonData.data)
+          setArtWork(artWork)
 
           document.title = jsonData.data.title
+
+          let tableDetails = [
+            {
+              title: "Artist",
+              value: artWork.artist_title
+            },
+            {
+              title: "Title",
+              value: artWork.title
+            },
+            {
+              title: "Place of Origin:",
+              value: artWork.place_of_origin
+            },
+            {
+              title: "Date",
+              value: artWork.date_display
+            },
+            {
+              title: "Medium",
+              value: artWork.medium_display
+            },
+            {
+              title: "Dimensions:",
+              value: artWork.dimensions
+            },
+            {
+              title: "Classification",
+              value: artWork.classification_titles ? (artWork.classification_titles.length > 0 ? artWork.classification_titles.join(', ') : '') : ''
+            },
+            {
+              title: "Credit Line",
+              value: artWork.credit_line
+            },
+            {
+              title: "Rank in search results:",
+              value: artWork.boost_rank
+            },
+          ]
+          setTableDetails(tableDetails)
         }
       )
 
@@ -64,33 +107,17 @@ const ArtWorkDetails = () => {
           }
 
           <table className="manifestTable">
-
             <tbody>
-              <tr className="tableRow">
-
-                <td><i>Place of Origin:</i></td>
-                <td className="valueCell">{artWork.place_of_origin}</td>
-
-              </tr>
-              <tr className="tableRow">
-
-                <td><i>Dimensions:</i></td>
-                <td className="valueCell">{artWork.dimensions}</td>
-
-              </tr>
-              <tr className="tableRow">
-
-                <td><i>Classification:</i></td>
-                <td className="valueCell">{artWork.classification_titles ? (artWork.classification_titles.length > 0 ? artWork.classification_titles.join(', ') : '') : ''}</td>
-
-              </tr>
-              <tr className="tableRow">
-
-                <td><i>Rank in search results:</i></td>
-                <td className="valueCell">{artWork.boost_rank}</td>
-
-              </tr>
-
+              {
+                tableDetails.map(el => (
+                  <>
+                    <tr className="tableRow">
+                      <td><i>{el.title}</i></td>
+                      <td className="valueCell">{el.value}</td>
+                    </tr>
+                  </>
+                ))
+              }
             </tbody>
           </table>
         </div>
