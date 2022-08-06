@@ -1,6 +1,12 @@
 .imageSector{
-    background-color:lightgray;
+    background-color:darkgray;
     text-align: center;
+
+}
+
+.artworkdescription{
+   margin:50px;
+   font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 
 }
 
@@ -18,7 +24,8 @@
 
 .mytable{
     display:table;
-    margin:0 auto;
+    margin:50px;
+
     border: 1px solid lightslategray
 }
 
@@ -27,4 +34,8 @@
 td{
     padding-left: 30px;
     padding-right: 30px;
+}
+
+.secondpart{
+    background-color:lightgray;
 }

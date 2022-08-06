@@ -49,6 +49,7 @@ const ArtWorkDetails = () => {
         <div className="imageSector">
           <img src={`${imageURL}/${artWork.image_id}/full/843,/0/default.jpg`} style={{ height: 843 + 'px' }} alt={artWork.title}></img>
         </div>
+        <div className="secondpart">
         <div className="title">
 
           <h2 className="blog-post-title artworktitle mb-1">{artWork.title}</h2>
@@ -58,7 +59,7 @@ const ArtWorkDetails = () => {
 
         {
           descriptions.map(description => (
-            <p>{description}</p>
+            <p className="artworkdescription">{description}</p>
           ))
         }
 
@@ -95,6 +96,7 @@ const ArtWorkDetails = () => {
 
 
 
+      </div>
       </div>
     </>
   )
