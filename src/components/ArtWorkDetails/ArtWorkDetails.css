@@ -1,41 +1,54 @@
-.imageSector{
-    background-color:darkgray;
+.pageDiv {
+    margin: 20px, 0px, 50px, 0px;
+}
+
+.imageSector {
+    background-color: #f3f3f3;
     text-align: center;
+    padding: 50px;
+}
+
+.artworkDescription {
+    margin: 50px 20% 50px 20%;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 
 }
 
-.artworkdescription{
-   margin:50px;
-   font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-
+.artworkTitle {
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
 
-.artworktitle{
-    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-
+.authorLine {
+    color: darkgray
 }
 
-.author{
-    color:darkgray
-}
-.title{
+.titleDiv {
     text-align: center;
+    padding: 30px 0px 0px 0px;
 }
 
-.mytable{
-    display:table;
-    margin:50px;
+.manifestTable {
+    display: table;
+    margin: 0 auto;
 
-    border: 1px solid lightslategray
+    /* border: 1px solid lightslategray */
 }
 
-
-
-td{
+td {
     padding-left: 30px;
     padding-right: 30px;
 }
 
-.secondpart{
-    background-color:lightgray;
+.tableRow {
+    height: 40px;
+}
+
+.valueCell {
+    color: #7e746d;
+}
+
+.tableRow {
+    border-bottom: 1px solid #e6e6e6;
+    border-top: 1px solid #e6e6e6;
+    border-collapse: collapse;
 }

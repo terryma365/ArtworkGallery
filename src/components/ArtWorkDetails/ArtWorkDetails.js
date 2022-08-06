@@ -31,72 +31,69 @@ const ArtWorkDetails = () => {
     const manifestUrl = `https://api.artic.edu/api/v1/artworks/${artWorkId}/manifest.json`
 
     fetch(manifestUrl)
-    .then(respsonse => respsonse.json())
-    .then(
-      jsonData => {
+      .then(respsonse => respsonse.json())
+      .then(
+        jsonData => {
 
-        let descriptions = jsonData.description[0].value.split('\n')
-        setDescriptions(descriptions)
-      }
-    )
+          let descriptions = jsonData.description[0].value.split('\n')
+          setDescriptions(descriptions)
+        }
+      )
 
   }, [artWorkId])
 
 
   return (
     <>
-      <div>
+      <div className="pageDiv">
         <div className="imageSector">
-          <img src={`${imageURL}/${artWork.image_id}/full/843,/0/default.jpg`} style={{ height: 843 + 'px' }} alt={artWork.title}></img>
+          <img src={`${imageURL}/${artWork.image_id}/full/843,/0/default.jpg`} style={{ width: 443 + 'px' }} alt={artWork.title}></img>
         </div>
-        <div className="secondpart">
-        <div className="title">
 
-          <h2 className="blog-post-title artworktitle mb-1">{artWork.title}</h2>
-          <p className="blog-post-meta author"><i>{artWork.date_display} by {artWork.artist_title}</i></p>
+        <div>
+          <div className="titleDiv">
+            <h2 className="artworkTitle mb-1">{artWork.title}</h2>
+            <p className="authorLine"><i>{artWork.date_display} by {artWork.artist_display}</i></p>
+          </div>
+          <hr></hr>
+
+          {
+            descriptions.map((description, index) => (
+              <p className="artworkDescription" key={index}>{description}</p>
+            ))
+          }
+
+          <table className="manifestTable">
+
+            <tbody>
+              <tr className="tableRow">
+
+                <td><i>Place of Origin:</i></td>
+                <td className="valueCell">{artWork.place_of_origin}</td>
+
+              </tr>
+              <tr className="tableRow">
+
+                <td><i>Dimensions:</i></td>
+                <td className="valueCell">{artWork.dimensions}</td>
+
+              </tr>
+              <tr className="tableRow">
+
+                <td><i>Classification:</i></td>
+                <td className="valueCell">{artWork.classification_titles ? (artWork.classification_titles.length > 0 ? artWork.classification_titles.join(', ') : '') : ''}</td>
+
+              </tr>
+              <tr className="tableRow">
+
+                <td><i>Rank in search results:</i></td>
+                <td className="valueCell">{artWork.boost_rank}</td>
+
+              </tr>
+
+            </tbody>
+          </table>
         </div>
-        <hr></hr>
-
-        {
-          descriptions.map((description,index)=> (
-            <p className="artworkdescription" key={index}>{description}</p>
-          ))
-        }
-
-        <table className="mytable">
-
-          <tbody className="tablesector">
-            <tr className="eachtable">
-
-              <td><i>Place of Origin:</i></td>
-              <td>{artWork.place_of_origin}</td>
-
-            </tr>
-            <tr className="eachtable">
-
-              <td><i>Dimensions:</i></td>
-              <td>{artWork.dimensions}</td>
-
-            </tr>
-            <tr className="eachtable">
-
-              <td><i>Classification:</i></td>
-              <td>{artWork.classification_titles ? (artWork.classification_titles.length > 0 ? artWork.classification_titles.join(', ') : '') : ''}</td>
-
-            </tr>
-            <tr className="eachtable">
-              <td><i>Rank in search results:</i></td>
-              <td>{artWork.boost_rank}</td>
-            </tr>
-
-          </tbody>
-        </table>
-
-
-
-
-
-      </div>
       </div>
     </>
   )
