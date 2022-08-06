@@ -7,6 +7,7 @@ import "./ArtWorkDetails.css"
 const ArtWorkDetails = () => {
   const [artWork, setArtWork] = useState({})
   const [imageURL, setimageURL] = useState('')
+  const [descriptions, setDescriptions] = useState([])
   let params = useParams()
   let artWorkId = params.artWorkId
 
@@ -18,7 +19,7 @@ const ArtWorkDetails = () => {
       .then(respsonse => respsonse.json())
       .then(
         jsonData => {
-          console.log(jsonData)
+          // console.log(jsonData)
 
           setimageURL(jsonData.config.iiif_url)
           setArtWork(jsonData.data)
@@ -26,6 +27,18 @@ const ArtWorkDetails = () => {
           document.title = jsonData.data.title
         }
       )
+
+    const manifestUrl = `https://api.artic.edu/api/v1/artworks/${artWorkId}/manifest.json`
+
+    fetch(manifestUrl)
+    .then(respsonse => respsonse.json())
+    .then(
+      jsonData => {
+
+        let descriptions = jsonData.description[0].value.split('\n')
+        setDescriptions(descriptions)
+      }
+    )
 
   }, [artWorkId])
 
@@ -42,6 +55,12 @@ const ArtWorkDetails = () => {
           <p className="blog-post-meta author"><i>{artWork.date_display} by {artWork.artist_title}</i></p>
         </div>
         <hr></hr>
+
+        {
+          descriptions.map(description => (
+            <p>{description}</p>
+          ))
+        }
 
         <table className="mytable">
 
