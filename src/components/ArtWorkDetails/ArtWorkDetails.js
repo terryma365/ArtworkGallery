@@ -58,8 +58,8 @@ const ArtWorkDetails = () => {
         <hr></hr>
 
         {
-          descriptions.map(description => (
-            <p className="artworkdescription">{description}</p>
+          descriptions.map((description,index)=> (
+            <p className="artworkdescription" key={index}>{description}</p>
           ))
         }
 
