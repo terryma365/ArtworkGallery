@@ -100,7 +100,7 @@ const GallaryList = () => {
       .then(respsonse => respsonse.json())
       .then(
         jsonData => {
-          // console.log(jsonData)
+          console.log(jsonData)
 
           setImgBaseUrl(jsonData.config.iiif_url)
           setHasMore(jsonData.data.length !== 0)
@@ -136,6 +136,8 @@ const GallaryList = () => {
   }
 
   const onKeyDown = (e) => {
+    console.log(e.key)
+
     if (e.key === 'Enter') {
       e.preventDefault();
       e.stopPropagation();

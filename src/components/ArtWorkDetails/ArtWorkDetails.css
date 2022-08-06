@@ -1,0 +1,30 @@
+.imageSector{
+    background-color:lightgray;
+    text-align: center;
+
+}
+
+.artworktitle{
+    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+
+}
+
+.author{
+    color:darkgray
+}
+.title{
+    text-align: center;
+}
+
+.mytable{
+    display:table;
+    margin:0 auto;
+    border: 1px solid lightslategray
+}
+
+
+
+td{
+    padding-left: 30px;
+    padding-right: 30px;
+}
