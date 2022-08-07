@@ -100,10 +100,9 @@ const GallaryList = () => {
       .then(respsonse => respsonse.json())
       .then(
         jsonData => {
-          console.log(jsonData)
 
           setImgBaseUrl(jsonData.config.iiif_url)
-          setHasMore(jsonData.data.length !== 0)
+          setHasMore(jsonData.data.length > 0)
 
           let newArtWorks = [...jsonData.data]
 
@@ -120,7 +119,6 @@ const GallaryList = () => {
             newArtWorks = [...artWorks, ...newData]
           }
 
-          console.log(newArtWorks.length)
           setArtWorks(newArtWorks)
         }
       )
@@ -136,8 +134,6 @@ const GallaryList = () => {
   }
 
   const onKeyDown = (e) => {
-    console.log(e.key)
-
     if (e.key === 'Enter') {
       e.preventDefault();
       e.stopPropagation();
@@ -149,7 +145,6 @@ const GallaryList = () => {
   const onFilterButtonClick = (categoryId) => {
     if (currentCategories.length === 1) {
       setCurrentCategories(categories)
-      onSearchClick()
       return
     }
 
