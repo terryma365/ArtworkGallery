@@ -1,53 +1,54 @@
 .pageDiv {
-    margin: 20px, 0px, 50px, 0px;
+  margin: 20px, 0px, 50px, 0px;
 }
 
 .imageSector {
-    background-color: #f3f3f3;
-    text-align: center;
-    padding: 50px;
+  background-color: #f3f3f3;
+  text-align: center;
+  padding: 50px;
 }
 
 .artworkDescription {
-    margin: 50px 20% 50px 20%;
-    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  margin: 50px 20% 50px 20%;
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 
 }
 
 .artworkTitle {
-    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
 
 .authorLine {
-    color: darkgray
+  color: darkgray
 }
 
 .titleDiv {
-    text-align: center;
-    padding: 30px 0px 0px 0px;
+  text-align: center;
+  padding: 30px 0px 0px 0px;
 }
 
 .manifestTable {
-    display: table;
-    margin: 0 auto;
-    width: 37%;
- }
+  display: table;
+  margin: 0 auto;
+  width: 37%;
+  margin-bottom: 100px;
+}
 
 td {
-    padding-left: 30px;
-    padding-right: 30px;
+  padding-left: 30px;
+  padding-right: 30px;
 }
 
 .tableRow {
-    height: 40px;
+  height: 40px;
 }
 
 .valueCell {
-    color: #7e746d;
+  color: #7e746d;
 }
 
 .tableRow {
-    border-bottom: 1px solid #e6e6e6;
-    border-top: 1px solid #e6e6e6;
-    border-collapse: collapse;
+  border-bottom: 1px solid #e6e6e6;
+  border-top: 1px solid #e6e6e6;
+  border-collapse: collapse;
 }
