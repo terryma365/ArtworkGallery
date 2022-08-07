@@ -145,6 +145,7 @@ const GallaryList = () => {
   const onFilterButtonClick = (categoryId) => {
     if (currentCategories.length === 1) {
       setCurrentCategories(categories)
+      onSearchClick()
       return
     }
 
